@@ -1,0 +1,226 @@
+[
+  {
+    "name": "SHOGUN NFT 100",
+    "price": "100.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 200",
+    "price": "200.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 300",
+    "price": "300.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": false,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 500",
+    "price": "500.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": false,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 600",
+    "price": "600.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1000 (Special)",
+    "price": "1000.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1000",
+    "price": "1000.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": false,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1100",
+    "price": "1100.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1177",
+    "price": "1177.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1200",
+    "price": "1200.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": false,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1217",
+    "price": "1217.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1227",
+    "price": "1227.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1300",
+    "price": "1300.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1350",
+    "price": "1350.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1500",
+    "price": "1500.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1600",
+    "price": "1600.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 1836",
+    "price": "1836.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 2000",
+    "price": "2000.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 2100",
+    "price": "2100.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 3000",
+    "price": "3000.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": false,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 3175",
+    "price": "3175.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 4000",
+    "price": "4000.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 5000",
+    "price": "5000.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": false,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 6600",
+    "price": "6600.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 8000",
+    "price": "8000.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": true,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 10000",
+    "price": "10000.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": false,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 30000",
+    "price": "30000.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": false,
+    "is_active": true
+  },
+  {
+    "name": "SHOGUN NFT 100000",
+    "price": "100000.00",
+    "image_url": null,
+    "image_status": "画像なし",
+    "is_special": false,
+    "is_active": true
+  }
+]
