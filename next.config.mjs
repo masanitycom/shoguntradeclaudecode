@@ -11,8 +11,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // SWC設定（WSL環境対応）
-  swcMinify: true,
 }
 
 export default nextConfig
