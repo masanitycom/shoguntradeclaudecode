@@ -85,13 +85,5 @@
       "react": "^19",
       "react-dom": "^19"
     }
-  },
-  "pnpm": {
-    "overrides": {
-      "vaul": {
-        "react": "^19",
-        "react-dom": "^19"
-      }
-    }
   }
 }
