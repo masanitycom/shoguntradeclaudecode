@@ -1,6 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
+
+// ビルド時の静的生成を無効化（Supabase環境変数が必要なため）
+export const dynamic = 'force-dynamic'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
