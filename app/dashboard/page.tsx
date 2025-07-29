@@ -400,6 +400,16 @@ export default function DashboardPage() {
                           <span className="text-white">${nft.nfts.price.toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between text-sm">
+                          <span className="text-gray-400">購入日</span>
+                          <span className="text-white">{new Date(nft.purchase_date).toLocaleDateString('ja-JP')}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-400">運用開始日</span>
+                          <span className="text-white">
+                            {nft.operation_start_date ? new Date(nft.operation_start_date).toLocaleDateString('ja-JP') : '設定中'}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
                           <span className="text-gray-400">獲得済み</span>
                           <span className="text-green-400">${nft.total_earned.toFixed(2)}</span>
                         </div>

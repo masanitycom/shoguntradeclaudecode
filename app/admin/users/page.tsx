@@ -51,6 +51,8 @@ interface User {
     current_investment: number
     total_earned: number
     is_active: boolean
+    purchase_date?: string
+    operation_start_date?: string
     nfts: {
       name: string
       price: number
@@ -226,6 +228,8 @@ export default function AdminUsersPage() {
             current_investment,
             total_earned,
             is_active,
+            purchase_date,
+            operation_start_date,
             nfts (name, price)
           )
         `)
@@ -561,13 +565,15 @@ export default function AdminUsersPage() {
 
   const getUserNFTInfo = (user: User) => {
     const activeNft = user.user_nfts?.find((nft) => nft.is_active)
-    if (!activeNft) return { hasNft: false, investment: 0, earned: 0, nftName: "-" }
+    if (!activeNft) return { hasNft: false, investment: 0, earned: 0, nftName: "-", purchaseDate: null, operationStartDate: null }
 
     return {
       hasNft: true,
       investment: activeNft.current_investment,
       earned: activeNft.total_earned,
       nftName: activeNft.nfts.name,
+      purchaseDate: activeNft.purchase_date,
+      operationStartDate: activeNft.operation_start_date,
     }
   }
 
@@ -874,17 +880,14 @@ export default function AdminUsersPage() {
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
-              <Table>
+              <Table className="min-w-full">
                 <TableHeader>
                   <TableRow className="border-gray-700">
-                    <TableHead className="text-gray-300 w-48">ユーザー情報</TableHead>
-                    <TableHead className="text-gray-300 w-32">紹介者</TableHead>
-                    <TableHead className="text-gray-300 w-20">NFT状況</TableHead>
-                    <TableHead className="text-gray-300 w-40">ウォレット情報</TableHead>
-                    <TableHead className="text-gray-300 w-32">投資・収益</TableHead>
-                    <TableHead className="text-gray-300 w-16">権限</TableHead>
-                    <TableHead className="text-gray-300 w-24">登録日</TableHead>
-                    <TableHead className="text-gray-300 w-80">操作</TableHead>
+                    <TableHead className="text-gray-300">ユーザー情報</TableHead>
+                    <TableHead className="text-gray-300">紹介者</TableHead>
+                    <TableHead className="text-gray-300">NFT・投資状況</TableHead>
+                    <TableHead className="text-gray-300">権限</TableHead>
+                    <TableHead className="text-gray-300">操作</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -892,13 +895,30 @@ export default function AdminUsersPage() {
                     const nftInfo = getUserNFTInfo(user)
                     return (
                       <TableRow key={user.id} className="border-gray-700 hover:bg-gray-800/50">
+                        {/* ユーザー情報 */}
                         <TableCell className="p-4 hover:text-white">
-                          <div>
-                            <div className="text-white font-medium">{user.name}</div>
-                            <div className="text-gray-400 text-sm">{user.user_id}</div>
-                            <div className="text-gray-400 text-xs">{user.email}</div>
+                          <div className="space-y-2">
+                            <div>
+                              <div className="text-white font-medium">{user.name}</div>
+                              <div className="text-gray-400 text-sm">{user.user_id}</div>
+                              <div className="text-gray-400 text-xs">{user.email}</div>
+                            </div>
+                            <div className="text-xs">
+                              <span className="text-gray-400">登録: </span>
+                              <span className="text-white">{new Date(user.created_at).toLocaleDateString("ja-JP")}</span>
+                            </div>
+                            {user.usdt_address && (
+                              <div className="text-xs">
+                                <div className="text-gray-400">USDT: </div>
+                                <div className="text-white font-mono truncate max-w-32">
+                                  {user.usdt_address}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </TableCell>
+                        
+                        {/* 紹介者 */}
                         <TableCell className="p-4 hover:text-white">
                           {user.referrer ? (
                             <div>
@@ -909,11 +929,29 @@ export default function AdminUsersPage() {
                             <span className="text-gray-500 text-sm">なし</span>
                           )}
                         </TableCell>
+                        
+                        {/* NFT・投資状況 */}
                         <TableCell className="p-4 hover:text-white">
                           {nftInfo.hasNft ? (
-                            <div className="space-y-1">
-                              <Badge className="bg-green-600 text-white text-xs whitespace-nowrap">保有</Badge>
-                              <div className="text-gray-400 text-xs truncate">{nftInfo.nftName}</div>
+                            <div className="space-y-2">
+                              <div className="flex items-center space-x-2">
+                                <Badge className="bg-green-600 text-white text-xs">保有</Badge>
+                                <div className="text-gray-400 text-xs truncate">{nftInfo.nftName}</div>
+                              </div>
+                              <div className="text-xs space-y-1">
+                                <div className="text-white">投資: ${nftInfo.investment.toLocaleString()}</div>
+                                <div className="text-green-400">収益: ${nftInfo.earned.toFixed(2)}</div>
+                              </div>
+                              {nftInfo.purchaseDate && nftInfo.operationStartDate && (
+                                <div className="text-xs space-y-1 pt-1 border-t border-gray-700">
+                                  <div className="text-gray-400">
+                                    購入: {new Date(nftInfo.purchaseDate).toLocaleDateString("ja-JP")}
+                                  </div>
+                                  <div className="text-white">
+                                    運用: {new Date(nftInfo.operationStartDate).toLocaleDateString("ja-JP")}
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           ) : (
                             <Badge
@@ -924,57 +962,8 @@ export default function AdminUsersPage() {
                             </Badge>
                           )}
                         </TableCell>
-                        <TableCell className="p-4 hover:text-white">
-                          <div className="space-y-1">
-                            {user.usdt_address ? (
-                              <div className="flex items-center space-x-2">
-                                <div className="text-xs">
-                                  <div className="text-gray-400">USDT(BEP20):</div>
-                                  <div className="text-white font-mono text-xs break-all max-w-32 truncate">
-                                    {user.usdt_address}
-                                  </div>
-                                </div>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="h-6 w-6 p-0 text-gray-400 hover:text-white"
-                                  onClick={() => copyToClipboard(user.usdt_address!, "USDTアドレス")}
-                                >
-                                  <Copy className="h-3 w-3" />
-                                </Button>
-                              </div>
-                            ) : (
-                              <div className="text-gray-500 text-xs">アドレス未設定</div>
-                            )}
-                            <div className="text-xs">
-                              <span className="text-gray-400">タイプ: </span>
-                              {user.wallet_type ? (
-                                <Badge
-                                  variant={user.wallet_type === "EVO" ? "default" : "outline"}
-                                  className={
-                                    user.wallet_type === "EVO"
-                                      ? "bg-purple-600 text-white"
-                                      : "border-gray-600 text-gray-400"
-                                  }
-                                >
-                                  {user.wallet_type}
-                                </Badge>
-                              ) : (
-                                <span className="text-gray-500">未設定</span>
-                              )}
-                            </div>
-                          </div>
-                        </TableCell>
-                        <TableCell className="p-4 hover:text-white">
-                          {nftInfo.hasNft ? (
-                            <div className="text-xs space-y-1">
-                              <div className="text-white">投資: ${nftInfo.investment.toLocaleString()}</div>
-                              <div className="text-green-400">収益: ${nftInfo.earned.toFixed(2)}</div>
-                            </div>
-                          ) : (
-                            <div className="text-gray-400 text-xs">-</div>
-                          )}
-                        </TableCell>
+                        
+                        {/* 権限 */}
                         <TableCell className="p-4 hover:text-white">
                           {user.is_admin ? (
                             <Badge className="bg-yellow-600 text-white text-xs whitespace-nowrap">管理者</Badge>
@@ -987,9 +976,8 @@ export default function AdminUsersPage() {
                             </Badge>
                           )}
                         </TableCell>
-                        <TableCell className="text-gray-400 text-sm p-4 hover:text-white">
-                          {new Date(user.created_at).toLocaleDateString("ja-JP")}
-                        </TableCell>
+                        
+                        {/* 操作 */}
                         <TableCell className="p-4 hover:text-white">
                           <div className="grid grid-cols-5 gap-1 w-full">
                             {/* 詳細ボタン */}
