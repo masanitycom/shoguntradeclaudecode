@@ -274,7 +274,7 @@ export default function DashboardPage() {
               onClick={handleRefreshData}
               variant="outline"
               size="sm"
-              className="border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white bg-transparent"
+              className="border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white bg-gray-800"
             >
               データ更新
             </Button>
@@ -283,7 +283,7 @@ export default function DashboardPage() {
               onClick={handleLogout}
               variant="outline"
               size="sm"
-              className="border-red-600 text-red-400 hover:bg-red-600 hover:text-white bg-transparent"
+              className="border-red-600 text-red-400 hover:bg-red-600 hover:text-white bg-gray-800"
             >
               <LogOut className="h-4 w-4 mr-2" />
               ログアウト
@@ -305,7 +305,7 @@ export default function DashboardPage() {
                 onClick={handleRefreshData}
                 variant="outline"
                 size="sm"
-                className="border-green-600 text-green-400 hover:bg-green-600 hover:text-white bg-transparent"
+                className="border-green-600 text-green-400 hover:bg-green-600 hover:text-white bg-gray-800"
               >
                 最新データ取得
               </Button>

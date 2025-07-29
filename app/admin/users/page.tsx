@@ -986,7 +986,7 @@ export default function AdminUsersPage() {
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  className="border-gray-600 text-gray-400 hover:bg-gray-600 bg-transparent h-8 w-full"
+                                  className="border-gray-600 text-gray-400 hover:bg-gray-600 bg-gray-800 h-8 w-full"
                                   onClick={() => setSelectedUser(user)}
                                   title="詳細"
                                 >
@@ -1067,7 +1067,7 @@ export default function AdminUsersPage() {
                             <Button
                               variant="outline"
                               size="sm"
-                              className="border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white bg-transparent h-8 w-full"
+                              className="border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white bg-gray-800 h-8 w-full"
                               onClick={() => router.push(`/admin/users/${user.id}/edit`)}
                               title="編集"
                             >
@@ -1078,7 +1078,7 @@ export default function AdminUsersPage() {
                             <Button
                               variant="outline"
                               size="sm"
-                              className="border-green-600 text-green-400 hover:bg-green-600 hover:text-white bg-transparent h-8 w-full"
+                              className="border-green-600 text-green-400 hover:bg-green-600 hover:text-white bg-gray-800 h-8 w-full"
                               onClick={() => router.push(`/admin/users/${user.id}/nfts`)}
                               title="NFT付与"
                             >
@@ -1089,7 +1089,7 @@ export default function AdminUsersPage() {
                             <Button
                               variant="outline"
                               size="sm"
-                              className="border-orange-600 text-orange-400 hover:bg-orange-600 hover:text-white bg-transparent h-8 w-full"
+                              className="border-orange-600 text-orange-400 hover:bg-orange-600 hover:text-white bg-gray-800 h-8 w-full"
                               onClick={() => {
                                 setUserToChangeReferrer(user)
                                 setShowReferrerDialog(true)
@@ -1103,7 +1103,7 @@ export default function AdminUsersPage() {
                             <Button
                               variant="outline"
                               size="sm"
-                              className="border-red-600 text-red-400 hover:bg-red-600 hover:text-white bg-transparent h-8 w-full"
+                              className="border-red-600 text-red-400 hover:bg-red-600 hover:text-white bg-gray-800 h-8 w-full"
                               onClick={() => {
                                 setUserToDelete(user)
                                 setShowDeleteDialog(true)

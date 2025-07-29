@@ -131,7 +131,7 @@ export default function AdminPage() {
               onClick={handleRefreshStats}
               variant="outline"
               size="sm"
-              className="border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white bg-transparent"
+              className="border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white bg-gray-800"
             >
               統計更新
             </Button>
@@ -140,7 +140,7 @@ export default function AdminPage() {
               onClick={handleLogout}
               variant="outline"
               size="sm"
-              className="border-red-600 text-red-400 hover:bg-red-600 hover:text-white bg-transparent"
+              className="border-red-600 text-red-400 hover:bg-red-600 hover:text-white bg-gray-800"
             >
               <LogOut className="h-4 w-4 mr-2" />
               ログアウト
