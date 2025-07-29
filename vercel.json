@@ -2,7 +2,7 @@
   "framework": "nextjs",
   "buildCommand": "pnpm build",
   "devCommand": "pnpm dev", 
-  "installCommand": "pnpm install --legacy-peer-deps",
+  "installCommand": "pnpm install --no-strict-peer-dependencies",
   "regions": ["hnd1"],
   "functions": {
     "app/api/calculate-rewards/route.ts": {
