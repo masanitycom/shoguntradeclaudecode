@@ -1,14 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
+    // 一時的に有効化（本番環境では false に変更推奨）
     ignoreDuringBuilds: true,
   },
   typescript: {
+    // 一時的に有効化（本番環境では false に変更推奨）
     ignoreBuildErrors: true,
   },
   images: {
     unoptimized: true,
   },
+  // SWC設定（WSL環境対応）
+  swcMinify: true,
 }
 
 export default nextConfig

@@ -162,14 +162,33 @@ export default function WeeklyRatesPage() {
         return acc
       }, {})
 
-      const weeklyGroupsData = Object.entries(groupedByWeek).map(([weekStart, rates]) => ({
-        week_start_date: weekStart,
-        week_end_date: rates[0]?.week_end_date || "",
-        rates,
-        total_groups: rates.length,
-        has_rewards: false, // TODO: 実際の報酬データから取得
-        affected_users: 0, // TODO: 実際のユーザー数から取得
-      }))
+      // 各週の報酬データとユーザー数を取得
+      const weeklyGroupsData = await Promise.all(
+        Object.entries(groupedByWeek).map(async ([weekStart, rates]) => {
+          // その週の報酬が存在するかチェック
+          const { count: rewardCount } = await supabase
+            .from('daily_rewards')
+            .select('id', { count: 'exact', head: true })
+            .gte('reward_date', weekStart)
+            .lte('reward_date', rates[0]?.week_end_date || weekStart)
+
+          // その週にアクティブなNFTを持つユーザー数を取得
+          const { count: userCount } = await supabase
+            .from('user_nfts')
+            .select('id', { count: 'exact', head: true })
+            .eq('is_active', true)
+            .lte('operation_start_date', weekStart)
+
+          return {
+            week_start_date: weekStart,
+            week_end_date: rates[0]?.week_end_date || "",
+            rates,
+            total_groups: rates.length,
+            has_rewards: (rewardCount || 0) > 0,
+            affected_users: userCount || 0,
+          }
+        })
+      )
 
       weeklyGroupsData.sort((a, b) => new Date(b.week_start_date).getTime() - new Date(a.week_start_date).getTime())
       setWeeklyGroups(weeklyGroupsData)
