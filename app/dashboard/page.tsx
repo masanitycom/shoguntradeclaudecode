@@ -16,6 +16,8 @@ interface UserNFT {
   total_earned: number
   max_earning: number
   is_active: boolean
+  purchase_date: string
+  operation_start_date: string
   nfts: {
     name: string
     image_url: string
@@ -87,6 +89,8 @@ export default function DashboardPage() {
           total_earned,
           max_earning,
           is_active,
+          purchase_date,
+          operation_start_date,
           nfts!inner(
             name,
             image_url,
@@ -208,6 +212,31 @@ export default function DashboardPage() {
   const calculateProgress = (nft: UserNFT) => {
     if (nft.max_earning === 0) return 0
     return Math.min((nft.total_earned / nft.max_earning) * 100, 100)
+  }
+
+  const getOperationStatus = (nft: UserNFT) => {
+    if (!nft.operation_start_date) {
+      return { status: '設定中', color: 'bg-gray-500', description: '運用開始日を設定中です' }
+    }
+    
+    const today = new Date()
+    const startDate = new Date(nft.operation_start_date)
+    const purchaseDate = new Date(nft.purchase_date)
+    
+    if (startDate > today) {
+      const daysUntilStart = Math.ceil((startDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+      return { 
+        status: '待機中', 
+        color: 'bg-yellow-500', 
+        description: `${startDate.toLocaleDateString('ja-JP')}から運用開始（あと${daysUntilStart}日）`
+      }
+    } else {
+      return { 
+        status: '運用中', 
+        color: 'bg-green-500', 
+        description: `${startDate.toLocaleDateString('ja-JP')}から運用開始済み`
+      }
+    }
   }
 
   const handleLogout = async () => {
@@ -379,6 +408,19 @@ export default function DashboardPage() {
                           <span className="text-white">{calculateProgress(nft).toFixed(1)}%</span>
                         </div>
                         <Progress value={calculateProgress(nft)} className="h-2" />
+                        
+                        {/* 運用ステータス表示 */}
+                        <div className="mt-3 pt-3 border-t border-gray-700">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-gray-400 text-sm">運用状況</span>
+                            <Badge className={`${getOperationStatus(nft).color} text-white text-xs`}>
+                              {getOperationStatus(nft).status}
+                            </Badge>
+                          </div>
+                          <p className="text-gray-300 text-xs">
+                            {getOperationStatus(nft).description}
+                          </p>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
