@@ -509,23 +509,6 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900/80 border-red-800">
-            <CardContent className="p-6">
-              <div className="flex items-center space-x-4 mb-4">
-                <Users className="h-8 w-8 text-green-400" />
-                <div>
-                  <h3 className="text-white font-semibold">紹介システム</h3>
-                  <p className="text-gray-400 text-sm">友達を紹介してボーナスを獲得</p>
-                </div>
-              </div>
-              <Button
-                onClick={() => router.push("/referrals")}
-                className="w-full bg-green-600 hover:bg-green-700 text-white"
-              >
-                紹介ページへ
-              </Button>
-            </CardContent>
-          </Card>
 
           <Card className="bg-gray-900/80 border-red-800">
             <CardContent className="p-6">
