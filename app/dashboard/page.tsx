@@ -420,7 +420,7 @@ export default function DashboardPage() {
                         <div>
                           <h3 className="text-white font-semibold">{nft.nfts.name}</h3>
                           <p className="text-gray-400 text-sm">
-                            日利上限: {(nft.nfts.daily_rate_limit * 100).toFixed(1)}%
+                            日利上限: {nft.nfts.daily_rate_limit}%
                           </p>
                         </div>
                       </div>
