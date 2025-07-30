@@ -61,7 +61,13 @@ export default function DashboardPage() {
         return
       }
 
-      console.log(`認証成功: ユーザーID = ${authUser.id}, Email = ${authUser.email}`)
+      console.log(`🔐 認証成功:`, {
+        userId: authUser.id,
+        email: authUser.email,
+        aud: authUser.aud,
+        role: authUser.role,
+        created_at: authUser.created_at
+      })
       setUser(authUser)
 
       // NFTデータを先に取得してからプロフィールを計算
@@ -85,6 +91,7 @@ export default function DashboardPage() {
           `
           id,
           nft_id,
+          user_id,
           current_investment,
           total_earned,
           max_earning,
@@ -109,8 +116,19 @@ export default function DashboardPage() {
 
       console.log(`NFT取得結果:`, {
         count: data?.length || 0,
+        userIds: data?.map(nft => nft.user_id) || [],
+        nftIds: data?.map(nft => nft.id) || [],
         rawData: data,
       })
+      
+      // user_idが一致しているかチェック
+      const mismatchedData = data?.filter(nft => nft.user_id !== userId) || []
+      if (mismatchedData.length > 0) {
+        console.error(`🚨 SECURITY ALERT: 異なるユーザーのNFTデータが取得されました!`, {
+          expectedUserId: userId,
+          mismatchedData: mismatchedData
+        })
+      }
 
       // データ型変換とログ出力
       const processedNFTs = (data || []).map((nft) => {
@@ -185,7 +203,19 @@ export default function DashboardPage() {
       }
 
       // ユーザー基本情報を取得
-      const { data: userData } = await supabase.from("users").select("*").eq("id", userId).single()
+      console.log(`ユーザー基本情報取得: userId = ${userId}`)
+      const { data: userData, error: userError } = await supabase.from("users").select("*").eq("id", userId).single()
+      
+      if (userError) {
+        console.error("ユーザー基本情報取得エラー:", userError)
+      }
+      
+      console.log(`取得されたユーザーデータ:`, {
+        id: userData?.id,
+        name: userData?.name,
+        email: userData?.email,
+        user_id: userData?.user_id
+      })
 
       console.log(`最終計算結果:`)
       console.log(`  - NFT数: ${nftData.length}`)
