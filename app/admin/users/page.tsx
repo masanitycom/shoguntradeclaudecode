@@ -945,10 +945,10 @@ export default function AdminUsersPage() {
                               {nftInfo.purchaseDate && nftInfo.operationStartDate && (
                                 <div className="text-xs space-y-1 pt-1 border-t border-gray-700">
                                   <div className="text-gray-400">
-                                    購入: {new Date(nftInfo.purchaseDate).toLocaleDateString("ja-JP")}
+                                    購入: {new Date(new Date(nftInfo.purchaseDate).getTime() + 24*60*60*1000).toLocaleDateString("ja-JP", { timeZone: 'UTC' })}
                                   </div>
                                   <div className="text-white">
-                                    運用: {new Date(nftInfo.operationStartDate).toLocaleDateString("ja-JP")}
+                                    運用: {new Date(new Date(nftInfo.operationStartDate).getTime() + 24*60*60*1000).toLocaleDateString("ja-JP", { timeZone: 'UTC' })}
                                   </div>
                                 </div>
                               )}

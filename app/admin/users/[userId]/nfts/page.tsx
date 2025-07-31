@@ -443,7 +443,7 @@ export default function UserNFTsPage() {
                           </div>
                         </TableCell>
                         <TableCell className="text-gray-300">
-                          {new Date(userNft.purchase_date).toLocaleDateString("ja-JP")}
+                          {new Date(userNft.purchase_date).toLocaleDateString("ja-JP", { timeZone: 'UTC' })}
                         </TableCell>
                         <TableCell className="text-white">${userNft.current_investment.toLocaleString()}</TableCell>
                         <TableCell className="text-green-400">${userNft.total_earned.toFixed(2)}</TableCell>
