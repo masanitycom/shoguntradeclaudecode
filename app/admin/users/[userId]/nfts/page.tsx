@@ -148,11 +148,25 @@ export default function UserNFTsPage() {
       const selectedNFTData = availableNFTs.find((nft) => nft.id === selectedNFT)
       if (!selectedNFTData) throw new Error("選択されたNFTが見つかりません")
 
+      // 購入日から運用開始日を計算（翌週を準備期間、翌々週の月曜日から運用開始）
+      const purchaseDateObj = new Date(purchaseDate + 'T15:00:00.000Z')
+      
+      // 購入日の翌々週の月曜日を計算
+      const operationStartDate = new Date(purchaseDateObj)
+      const dayOfWeek = purchaseDateObj.getDay() // 0=日曜, 1=月曜, ..., 6=土曜
+      
+      // 今週の月曜日を取得
+      const daysToMonday = dayOfWeek === 0 ? 1 : (8 - dayOfWeek) % 7 || 7
+      operationStartDate.setDate(purchaseDateObj.getDate() + daysToMonday + 7) // 翌々週の月曜日
+
       const { error } = await supabase.from("user_nfts").insert({
         user_id: userId,
         nft_id: selectedNFT,
-        purchase_date: purchaseDate,
+        purchase_date: purchaseDateObj.toISOString(),
+        operation_start_date: operationStartDate.toISOString(),
+        purchase_price: selectedNFTData.price,
         current_investment: selectedNFTData.price,
+        max_earning: selectedNFTData.price * 3, // 300%キャップ
         total_earned: 0,
         is_active: true,
       })
@@ -429,7 +443,7 @@ export default function UserNFTsPage() {
                           </div>
                         </TableCell>
                         <TableCell className="text-gray-300">
-                          {new Date(userNft.purchase_date).toLocaleDateString("ja-JP")}
+                          {new Date(userNft.purchase_date + 'T00:00:00').toLocaleDateString("ja-JP")}
                         </TableCell>
                         <TableCell className="text-white">${userNft.current_investment.toLocaleString()}</TableCell>
                         <TableCell className="text-green-400">${userNft.total_earned.toFixed(2)}</TableCell>
